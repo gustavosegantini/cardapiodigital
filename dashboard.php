@@ -54,6 +54,7 @@
 
     <section>
         <h2>Cardápios</h2>
+        <a href="criar_cardapio.php" class="btn-criar-cardapio">+ Criar Cardápio</a>
         <ul>
             <?php
             if (count($cardapios) > 0) {

@@ -43,3 +43,19 @@ ul {
 li {
     margin-bottom: 10px;
 }
+
+
+.btn-criar-cardapio {
+    display: inline-block;
+    margin: 15px 0;
+    padding: 10px 15px;
+    background-color: #fe793f;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-criar-cardapio:hover {
+    background-color: #fd6530;
+}
