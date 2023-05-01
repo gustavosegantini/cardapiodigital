@@ -7,10 +7,12 @@ body {
 }
 
 h1 {
-    background-color: #4CAF50;
+    background-color: #ff9f6f;
     color: #fff;
     padding: 15px;
     margin-bottom: 30px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 form {
@@ -22,6 +24,7 @@ form {
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
 label {
@@ -34,16 +37,22 @@ input {
     padding: 5px;
     margin-top: 5px;
     box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 input[type="submit"] {
     width: auto;
-    background-color: #4CAF50;
+    background-color: #ff9f6f;
     color: #fff;
     cursor: pointer;
     margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #ff8f5f;
 }
