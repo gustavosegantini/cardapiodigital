@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Restaurante</title>
-    <link rel="stylesheet" href="css/estilo.css"> <!-- Adicione seu arquivo de estilo CSS aqui -->
+    <link rel="stylesheet" href="css/cadastro_style.css">
 </head>
 <body>
     <h1>Cadastro de Restaurante</h1>
