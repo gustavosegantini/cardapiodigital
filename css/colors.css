@@ -1,0 +1,8 @@
+/* Cores padrão */
+:root {
+    --primary-color: #fe793f;
+    --background-color: #f9f9f9;
+    --text-color: #333;
+    --input-border-color: #ccc;
+    --submit-hover-color: #fd6835;
+}

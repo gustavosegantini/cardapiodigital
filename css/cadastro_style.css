@@ -1,13 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
 }
 
 h1 {
-    background-color: #ff9f6f;
+    background-color: var(--primary-color);
     color: #fff;
     padding: 15px;
     margin-bottom: 30px;
@@ -38,12 +38,12 @@ input {
     margin-top: 5px;
     box-sizing: border-box;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border-color);
 }
 
 input[type="submit"] {
     width: auto;
-    background-color: #fe793f;
+    background-color: var(--primary-color);
     color: #fff;
     cursor: pointer;
     margin-top: 20px;
@@ -54,5 +54,5 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #fe793f;
+    background-color: var(--submit-hover-color);
 }
