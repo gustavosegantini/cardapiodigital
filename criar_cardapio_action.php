@@ -10,7 +10,7 @@ if (!isset($_SESSION['restaurante_id'])) {
     exit;
 }
 
-require_once("conect.php");
+require_once("../conect.php");
 
 $restaurante_id = $_SESSION['restaurante_id'];
 $titulo = $_POST['titulo'];
