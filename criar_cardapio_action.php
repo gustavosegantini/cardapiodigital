@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 
 // Verificar se o usuário está logado
@@ -15,6 +18,11 @@ $titulo = $_POST['titulo'];
 // Inserir o cardápio no banco de dados
 $sql = "INSERT INTO cardapios (restaurante_id, titulo) VALUES (?, ?)";
 $stmt = $conn->prepare($sql);
+
+if ($stmt === false) {
+    trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);
+}
+
 $stmt->bind_param("is", $restaurante_id, $titulo);
 
 if ($stmt->execute()) {
