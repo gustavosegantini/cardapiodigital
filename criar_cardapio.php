@@ -7,7 +7,7 @@
     <title>Criar Cardápio</title>
     <link rel="stylesheet" href="path/to/your/css/colors.css">
     <link rel="stylesheet" href="path/to/your/css/cadastro_style.css">
-    <link rel="stylesheet" href="path/to/your/css/criar_cardapio_style.css">
+    <link rel="stylesheet" href="css/criar_cardapio_style.css">
     <!-- Adicione o caminho correto para seus arquivos CSS -->
 </head>
 
