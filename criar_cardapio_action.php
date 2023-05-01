@@ -9,7 +9,7 @@ if (!isset($_SESSION['restaurante_id'])) {
 
 require_once("conect.php");
 
-$restaurante_id = $_SESSION['user_id'];
+$restaurante_id = $_SESSION['restaurante_id'];
 $titulo = $_POST['titulo'];
 
 // Inserir o cardápio no banco de dados
