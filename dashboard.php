@@ -225,7 +225,7 @@
             var pratoRow = event.target.closest('tr');
             var nome = pratoRow.querySelector('.nome').textContent;
             var descricao = pratoRow.querySelector('.descricao').textContent;
-            var preco = pratoRow.querySelector('.preco').textContent;
+            var preco = parseFloat(pratoRow.querySelector('.preco').textContent.replace('.', '').replace(',', '.'));
             var categoria = pratoRow.querySelector('.categoria').textContent;
 
             // Atualize os campos do formulário no modal "Editar Prato"
@@ -233,7 +233,7 @@
             document.getElementById('editarPratoNome').value = nome;
             document.getElementById('editarPratoDescricao').value = descricao;
             document.getElementById('editarPratoPreco').value = preco;
-            document.getElementById('editarPratoCategoria').value = document.getElementById('editarPratoCategoria').value = categoria;
+            document.getElementById('editarPratoCategoria').value = categoria;
 
             // Abra o modal "Editar Prato"
             var editarPratoModal = document.getElementById("editarPratoModal");
