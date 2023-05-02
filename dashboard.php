@@ -150,8 +150,9 @@
                     </select>
                 </div>
                 <div>
-                    <button type="button" onclick="salvarPrato()">Salvar Prato</button>
-
+                    <button type="button"
+                        onclick="document.getElementById('adicionarPratoModal').style.display='none'">Fechar</button>
+                    <button type="submit">Adicionar Prato</button>
                 </div>
             </form>
         </div>
