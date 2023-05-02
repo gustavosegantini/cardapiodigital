@@ -77,16 +77,16 @@
                 <tbody>
                     <?php while ($prato = $result_pratos->fetch_assoc()): ?>
                         <tr>
-                            <td>
+                            <td class="nome">
                                 <?= $prato['nome'] ?>
                             </td>
-                            <td>
+                            <td class="descricao">
                                 <?= $prato['descricao'] ?>
                             </td>
-                            <td>
+                            <td class="preco">
                                 <?= number_format($prato['preco'], 2, ',', '.') ?>
                             </td>
-                            <td>
+                            <td class="categoria">
                                 <?= $prato['categoria'] ?>
                             </td>
                             <td>
@@ -99,6 +99,7 @@
                     <?php endwhile; ?>
                 </tbody>
             </table>
+
         </div>
 
     </section>
@@ -145,6 +146,50 @@
         </div>
     </div>
 
+    <!-- Modal Editar Prato -->
+    <div id="editarPratoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h5 id="modal-title">Editar Prato</h5>
+            <form id="prato-form" action="editar_prato_action.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="pratoId" name="id">
+                <div>
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div>
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" name="descricao" rows="3"></textarea>
+                </div>
+                <div>
+                    <label for="imagem">Imagem (opcional)</label>
+                    <input type="file" id="imagem" name="imagem">
+                </div>
+                <div>
+                    <label for="preco">Preço</label>
+                    <input type="number" step="0.01" id="preco" name="preco" required>
+                </div>
+                <div>
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="entrada">Entrada</option>
+                        <option value="petiscos">Petiscos</option>
+                        <option value="pratos principais">Pratos Principais</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="sobremesas">Sobremesas</option>
+                        <option value="carta de vinhos">Carta de Vinhos</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="button"
+                        onclick="document.getElementById('editarPratoModal').style.display='none'">Fechar</button>
+                    <button type="submit">Salvar Prato</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
     <script>
         // Pega o modal
         var modal = document.getElementById("adicionarPratoModal");
@@ -180,7 +225,7 @@
             var preco = pratoRow.querySelector('.preco').textContent;
             var categoria = pratoRow.querySelector('.categoria').textContent;
 
-            document.getElementById('prato-form').setAttribute('data-id', pratoId);
+            document.getElementById('pratoId').value = pratoId;
             document.getElementById('nome').value = nome;
             document.getElementById('descricao').value = descricao;
             document.getElementById('preco').value = preco;
@@ -189,8 +234,10 @@
             // Atualizar o título do modal para "Editar Prato"
             document.getElementById('modal-title').textContent = 'Editar Prato';
 
-            modal.style.display = "block";
+            // Abre o modal de edição
+            document.getElementById('editarPratoModal').style.display = "block";
         }
+
         function salvarPrato() {
             var pratoId = document.getElementById('prato-form').getAttribute('data-id');
             var nome = document.getElementById('nome').value;
