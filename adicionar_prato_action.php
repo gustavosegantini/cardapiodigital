@@ -62,7 +62,7 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['size'] > 0) {
 // Inserir o prato no banco de dados
 $sql = "INSERT INTO pratos (restaurante_id, nome, descricao, imagem, preco, categoria_id) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("isssdii", $restaurante_id, $nome, $descricao, $imagem, $preco, $categoria_id);
+$stmt->bind_param("isssdi", $restaurante_id, $nome, $descricao, $imagem, $preco, $categoria_id);
 
 if ($stmt->execute()) {
     // Redirecionar para o dashboard
