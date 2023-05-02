@@ -1,11 +1,14 @@
 <?php
 require 'conect.php';
 
-function obterPratos()
+function obterPratos($restaurante_id)
 {
     $conn = conectarBD();
-    $sql = "SELECT * FROM pratos";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM pratos WHERE restaurante_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $restaurante_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $pratos = [];
     if ($result->num_rows > 0) {
@@ -14,10 +17,12 @@ function obterPratos()
         }
     }
 
+    $stmt->close();
     $conn->close();
 
     return $pratos;
 }
+
 
 $pratos = obterPratos();
 ?>
