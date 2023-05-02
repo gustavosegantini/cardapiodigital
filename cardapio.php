@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -21,10 +19,16 @@ function obterPratos($restaurante_id) {
     return $pratos;
 }
 
-$restaurante_id = $_SESSION['restaurante_id'];
-$pratos = obterPratos($restaurante_id);
+// Obter o restaurante_id do parâmetro GET
+if (isset($_GET['restaurante_id'])) {
+    $restaurante_id = intval($_GET['restaurante_id']);
+    $pratos = obterPratos($restaurante_id);
+} else {
+    die("Nenhum restaurante selecionado.");
+}
 
-?>
+// Restante do arquivo cardapio.php...
+
 
 <!DOCTYPE html>
 <html lang="en">
