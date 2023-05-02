@@ -54,6 +54,51 @@
     <section>
         <h2>Pratos</h2>
         <button id="adicionarPratoBtn">+ Adicionar Prato</button>
+
+        <?php
+        // Busca pratos do restaurante
+        $conn = conectarBD();
+        $sql = "SELECT * FROM pratos WHERE restaurante_id = $restaurante_id";
+        $result_pratos = $conn->query($sql);
+        $conn->close();
+        ?>
+
+        <div class="pratos">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($prato = $result_pratos->fetch_assoc()): ?>
+                        <tr>
+                            <td>
+                                <?= $prato['nome'] ?>
+                            </td>
+                            <td>
+                                <?= $prato['descricao'] ?>
+                            </td>
+                            <td>
+                                <?= number_format($prato['preco'], 2, ',', '.') ?>
+                            </td>
+                            <td>
+                                <?= $prato['categoria'] ?>
+                            </td>
+                            <td>
+                                <button class="btn btn-warning" data-prato-id="<?= $prato['id'] ?>">Editar</button>
+                                <button class="btn btn-danger" data-prato-id="<?= $prato['id'] ?>">Excluir</button>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+
     </section>
 
     <!-- Modal Adicionar Prato -->
