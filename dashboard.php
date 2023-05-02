@@ -267,10 +267,6 @@
             var editarPratoModal = document.getElementById("editarPratoModal");
             editarPratoModal.style.display = "block";
 
-            document.querySelectorAll(".btn-editar").forEach(function (btn) {
-                btn.addEventListener("click", editarPrato);
-            });
-
         }
 
         function excluirPrato(pratoId) {
@@ -321,6 +317,9 @@
                 xhttp.send("nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria_id=" + categoriaId);
             }
         }
+        document.querySelectorAll(".btn-editar").forEach(function (btn) {
+            btn.addEventListener("click", editarPrato);
+        });
 
     </script>
 
