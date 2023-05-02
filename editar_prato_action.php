@@ -16,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = conectarBD();
     $sql = "UPDATE pratos SET nome = ?, descricao = ?, preco = ?, categoria = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssdsii", $nome, $descricao, $preco, $categoria, $restaurante_id, $id);
+    $stmt->bind_param("issssd", $restaurante_id, $nome, $descricao, $imagem, $preco, $categoria);
+
 
     $stmt->execute();
 
