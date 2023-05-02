@@ -38,8 +38,6 @@
         exit();
     }
 
-    $categorias = obterCategorias();
-
     function obterCategorias()
     {
         $conn = conectarBD();
@@ -98,32 +96,115 @@
                                 <?= $prato['nome'] ?>
                             </td>
                             <td class="descricao">
-
                                 <?= $prato['descricao'] ?>
                             </td>
                             <td class="preco">
-                                <?= $prato['preco'] ?>
+                                <?= number_format($prato['preco'], 2, ',', '.') ?>
                             </td>
                             <td class="categoria">
-                                <?php
-                                foreach ($categorias as $categoria) {
-                                    if ($categoria['id'] == $prato['categoria_id']) {
-                                        echo $categoria['nome'];
-                                        break;
-                                    }
-                                }
-                                ?>
+                                <?= $prato['categoria'] ?>
                             </td>
-                            <td class="acoes">
-                                <button class="btn btn-warning btn-sm editarPratoBtn">Editar</button>
-                                <button class="btn btn-danger btn-sm excluirPratoBtn">Excluir</button>
+                            <td>
+                                <button data-id="<?= $prato['id'] ?>" class="btn-editar"
+                                    onclick="editarPrato(event)">Editar</button>
+
+                                <button class="btn btn-danger btn-excluir"
+                                    data-prato-id="<?= $prato['id'] ?>">Excluir</button>
+
                             </td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
+
         </div>
+
     </section>
+
+    <!-- Modal Adicionar Prato -->
+    <div id="adicionarPratoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h5>Adicionar Prato</h5>
+            <form action="adicionar_prato_action.php" method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div>
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" name="descricao" rows="3"></textarea>
+                </div>
+                <div>
+                    <label for="imagem">Imagem (opcional)</label>
+                    <input type="file" id="imagem" name="imagem">
+                </div>
+                <div>
+                    <label for="preco">Preço</label>
+                    <input type="number" step="0.01" id="preco" name="preco" required>
+                </div>
+                <div>
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="entrada">Entrada</option>
+                        <option value="petiscos">Petiscos</option>
+                        <option value="pratos principais">Pratos Principais</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="sobremesas">Sobremesas</option>
+                        <option value="carta de vinhos">Carta de Vinhos</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="button"
+                        onclick="document.getElementById('adicionarPratoModal').style.display='none'">Fechar</button>
+                    <button type="submit">Adicionar Prato</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Editar Prato -->
+    <div id="editarPratoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h5>Editar Prato</h5>
+            <form action="editar_prato_action.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="editarPratoId" name="id">
+                <div>
+                    <label for="editarPratoNome">Nome</label>
+                    <input type="text" id="editarPratoNome" name="nome" required>
+                </div>
+                <div>
+                    <label for="editarPratoDescricao">Descrição</label>
+                    <textarea id="editarPratoDescricao" name="descricao" rows="3"></textarea>
+                </div>
+                <div>
+                    <label for="imagem">Imagem (opcional)</label>
+                    <input type="file" id="imagem" name="imagem">
+                </div>
+                <div>
+                    <label for="editarPratoPreco">Preço</label>
+                    <input type="number" step="0.01" id="editarPratoPreco" name="preco" required>
+                </div>
+                <div>
+                    <label for="editarPratoCategoria">Categoria</label>
+                    <select id="editarPratoCategoria" name="categoria" required>
+                        <option value="entrada">Entrada</option>
+                        <option value="petiscos">Petiscos</option>
+                        <option value="pratos principais">Pratos Principais</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="sobremesas">Sobremesas</option>
+                        <option value="carta de vinhos">Carta de Vinhos</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="button"
+                        onclick="document.getElementById('editarPratoModal').style.display='none'">Fechar</button>
+                    <button type="submit">Salvar Prato</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 
     <script>
