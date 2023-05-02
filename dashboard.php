@@ -266,6 +266,11 @@
             // Abra o modal "Editar Prato"
             var editarPratoModal = document.getElementById("editarPratoModal");
             editarPratoModal.style.display = "block";
+
+            document.querySelectorAll(".btn-editar").forEach(function (btn) {
+                btn.addEventListener("click", editarPrato);
+            });
+
         }
 
         function excluirPrato(pratoId) {
