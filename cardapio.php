@@ -42,13 +42,21 @@
         return $pratos;
     }
 
-    $restaurante_id = 1; // Você deve obter o ID do restaurante por outros meios, por exemplo, através de uma URL amigável
+    // Obter o restaurante_id do parâmetro GET
+    if (isset($_GET['restaurante_id'])) {
+        $restaurante_id = intval($_GET['restaurante_id']);
+        $pratos = obterPratos($restaurante_id);
+    } else {
+        die("Nenhum restaurante selecionado.");
+    } // Você deve obter o ID do restaurante por outros meios, por exemplo, através de uma URL amigável
     $nome_restaurante = obterNomeRestaurante($restaurante_id);
 
     $categorias = ["Entradas", "Pratos Principais", "Bebidas", "Sobremesas"]; // Lista de categorias possíveis
     ?>
 
-    <h1><?php echo $nome_restaurante; ?></h1>
+    <h1>
+        <?php echo $nome_restaurante; ?>
+    </h1>
 
     <div class="card-container">
         <?php
