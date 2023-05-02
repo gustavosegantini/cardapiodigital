@@ -93,7 +93,9 @@
                                 <button data-id="<?= $prato['id'] ?>" class="btn-editar"
                                     onclick="editarPrato(event)">Editar</button>
 
-                                <button class="btn btn-danger" data-prato-id="<?= $prato['id'] ?>">Excluir</button>
+                                <button class="btn btn-danger btn-excluir"
+                                    data-prato-id="<?= $prato['id'] ?>">Excluir</button>
+
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -240,6 +242,28 @@
             editarPratoModal.style.display = "block";
         }
 
+        function excluirPrato(pratoId) {
+            if (confirm("Deseja realmente excluir este prato?")) {
+                var form = document.createElement("form");
+                form.setAttribute("method", "post");
+                form.setAttribute("action", "excluir_prato_action.php");
+
+                var idField = document.createElement("input");
+                idField.setAttribute("type", "hidden");
+                idField.setAttribute("name", "id");
+                idField.setAttribute("value", pratoId);
+                form.appendChild(idField);
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+
+        document.querySelectorAll(".btn-excluir").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                excluirPrato(this.dataset.pratoId);
+            });
+        });
 
 
 
