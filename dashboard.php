@@ -73,8 +73,9 @@
         <?php
         // Busca pratos do restaurante
         $conn = conectarBD();
-        $sql = "SELECT * FROM pratos WHERE restaurante_id = $restaurante_id";
+        $sql = "SELECT pratos.*, categorias.nome AS categoria_nome FROM pratos JOIN categorias ON pratos.categoria_id = categorias.id WHERE restaurante_id = $restaurante_id";
         $result_pratos = $conn->query($sql);
+
         $conn->close();
         ?>
 
@@ -102,8 +103,9 @@
                                 <?= number_format($prato['preco'], 2, ',', '.') ?>
                             </td>
                             <td class="categoria">
-                                <?= $prato['categoria'] ?>
+                                <?= $prato['nome'] ?>
                             </td>
+
                             <td>
                                 <button data-id="<?= $prato['id'] ?>" class="btn-editar"
                                     onclick="editarPrato(event)">Editar</button>
@@ -242,7 +244,8 @@
             var nome = pratoRow.querySelector('.nome').textContent.trim();
             var descricao = pratoRow.querySelector('.descricao').textContent.trim();
             var preco = parseFloat(pratoRow.querySelector('.preco').textContent.replace('.', '').replace(',', '.'));
-            var categoriaId = pratoRow.querySelector('.categoria').dataset.categoriaId;
+            var categoriaId = pratoRow.querySelector('.categoria').textContent.trim();
+
 
             // Atualize os campos do formulário no modal "Editar Prato"
             document.getElementById('editarPratoId').value = pratoId;
