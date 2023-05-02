@@ -225,18 +225,17 @@
             var preco = pratoRow.querySelector('.preco').textContent;
             var categoria = pratoRow.querySelector('.categoria').textContent;
 
-            document.getElementById('pratoId').value = pratoId;
-            document.getElementById('nome').value = nome;
-            document.getElementById('descricao').value = descricao;
-            document.getElementById('preco').value = preco;
-            document.getElementById('categoria').value = categoria;
-
-            // Atualizar o título do modal para "Editar Prato"
-            document.getElementById('modal-title').textContent = 'Editar Prato';
+            // Atualize os campos do formulário no modal "Editar Prato"
+            document.getElementById('editarPratoId').value = pratoId;
+            document.getElementById('editarPratoNome').value = nome;
+            document.getElementById('editarPratoDescricao').value = descricao;
+            document.getElementById('editarPratoPreco').value = preco;
+            document.getElementById('editarPratoCategoria').value = categoria;
 
             // Abre o modal de edição
             document.getElementById('editarPratoModal').style.display = "block";
         }
+
 
         function salvarPrato() {
             var pratoId = document.getElementById('prato-form').getAttribute('data-id');
