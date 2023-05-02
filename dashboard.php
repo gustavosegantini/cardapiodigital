@@ -67,12 +67,25 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        <th>Preço</th>
-                        <th>Categoria</th>
-                        <th>Ações</th>
+                        <td class="nome">
+                            <?= $prato['nome'] ?>
+                        </td>
+                        <td class="descricao">
+                            <?= $prato['descricao'] ?>
+                        </td>
+                        <td class="preco">
+                            <?= number_format($prato['preco'], 2, ',', '.') ?>
+                        </td>
+                        <td class="categoria">
+                            <?= $prato['categoria'] ?>
+                        </td>
+                        <td>
+                            <button data-id="<?= $prato['id'] ?>" class="btn-editar"
+                                onclick="editarPrato(event)">Editar</button>
+                            <button class="btn btn-danger" data-prato-id="<?= $prato['id'] ?>">Excluir</button>
+                        </td>
                     </tr>
+
                 </thead>
                 <tbody>
                     <?php while ($prato = $result_pratos->fetch_assoc()): ?>
@@ -235,6 +248,7 @@
             // Abre o modal de edição
             document.getElementById('editarPratoModal').style.display = "block";
         }
+
 
 
         function salvarPrato() {
