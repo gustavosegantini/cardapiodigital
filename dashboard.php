@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -47,8 +37,6 @@
         echo "Restaurante não encontrado!";
         exit();
     }
-
-    $categorias = obterCategorias();
 
     function obterCategorias()
     {
@@ -108,40 +96,215 @@
                                 <?= $prato['nome'] ?>
                             </td>
                             <td class="descricao">
-
                                 <?= $prato['descricao'] ?>
                             </td>
                             <td class="preco">
-                                <?= $prato['preco'] ?>
+                                <?= number_format($prato['preco'], 2, ',', '.') ?>
                             </td>
                             <td class="categoria">
-                                <?php
-                                foreach ($categorias as $categoria) {
-                                    if ($categoria['id'] == $prato['categoria_id']) {
-                                        echo $categoria['nome'];
-                                        break;
-                                    }
-                                }
-                                ?>
+                                <?= $prato['categoria'] ?>
                             </td>
-                            <td class="acoes">
-                                <button class="btn btn-warning btn-sm editarPratoBtn">Editar</button>
-                                <button class="btn btn-danger btn-sm excluirPratoBtn">Excluir</button>
+                            <td>
+                                <button data-id="<?= $prato['id'] ?>" class="btn-editar"
+                                    onclick="editarPrato(event)">Editar</button>
+
+                                <button class="btn btn-danger btn-excluir"
+                                    data-prato-id="<?= $prato['id'] ?>">Excluir</button>
+
                             </td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
+
         </div>
+
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3s4GmPkkD/0/1jMNKx"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-        integrity="sha384-Lx6D5U6NfpF5hA8Rf+1j9/154qz3k6aJhDq5mRAA5ua6pLYeVM9WtIK0r9zj5U77"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-        integrity="sha384-s7YuIpjbl6Qtdidq3avCvI9dS8Td8nJ59S6GpU6NdbU6+8U6BjRrjxGga6CgDZM0"
-        crossorigin="anonymous"></script>
-    <script src="js/dashboard.js"></script> <!-- Adicione seu arquivo de script JavaScript aqui -->
+    <!-- Modal Adicionar Prato -->
+    <div id="adicionarPratoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h5>Adicionar Prato</h5>
+            <form action="adicionar_prato_action.php" method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div>
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" name="descricao" rows="3"></textarea>
+                </div>
+                <div>
+                    <label for="imagem">Imagem (opcional)</label>
+                    <input type="file" id="imagem" name="imagem">
+                </div>
+                <div>
+                    <label for="preco">Preço</label>
+                    <input type="number" step="0.01" id="preco" name="preco" required>
+                </div>
+                <div>
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="entrada">Entrada</option>
+                        <option value="petiscos">Petiscos</option>
+                        <option value="pratos principais">Pratos Principais</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="sobremesas">Sobremesas</option>
+                        <option value="carta de vinhos">Carta de Vinhos</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="button"
+                        onclick="document.getElementById('adicionarPratoModal').style.display='none'">Fechar</button>
+                    <button type="submit">Adicionar Prato</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Editar Prato -->
+    <div id="editarPratoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h5>Editar Prato</h5>
+            <form action="editar_prato_action.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="editarPratoId" name="id">
+                <div>
+                    <label for="editarPratoNome">Nome</label>
+                    <input type="text" id="editarPratoNome" name="nome" required>
+                </div>
+                <div>
+                    <label for="editarPratoDescricao">Descrição</label>
+                    <textarea id="editarPratoDescricao" name="descricao" rows="3"></textarea>
+                </div>
+                <div>
+                    <label for="imagem">Imagem (opcional)</label>
+                    <input type="file" id="imagem" name="imagem">
+                </div>
+                <div>
+                    <label for="editarPratoPreco">Preço</label>
+                    <input type="number" step="0.01" id="editarPratoPreco" name="preco" required>
+                </div>
+                <div>
+                    <label for="editarPratoCategoria">Categoria</label>
+                    <select id="editarPratoCategoria" name="categoria" required>
+                        <option value="entrada">Entrada</option>
+                        <option value="petiscos">Petiscos</option>
+                        <option value="pratos principais">Pratos Principais</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="sobremesas">Sobremesas</option>
+                        <option value="carta de vinhos">Carta de Vinhos</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="button"
+                        onclick="document.getElementById('editarPratoModal').style.display='none'">Fechar</button>
+                    <button type="submit">Salvar Prato</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        // Pega o modal
+        var modal = document.getElementById("adicionarPratoModal");
+
+        // Pega o botão que abre o modal
+        var btn = document.getElementById("adicionarPratoBtn");
+
+        // Pega o elemento <span> que fecha o modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Quando o usuário clicar no botão, abra o modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // Quando o usuário clicar no <span> (x), feche o modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // Quando o usuário clicar em qualquer lugar fora do modal, feche-o
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            } else if (event.target == editarPratoModal) {
+                editarPratoModal.style.display = "none";
+            }
+        }
+
+        function editarPrato(event) {
+            var pratoId = event.target.dataset.id;
+            var pratoRow = event.target.closest('tr');
+            var nome = pratoRow.querySelector('.nome').textContent.trim();
+            var descricao = pratoRow.querySelector('.descricao').textContent.trim();
+            var preco = parseFloat(pratoRow.querySelector('.preco').textContent.replace('.', '').replace(',', '.'));
+            var categoriaId = pratoRow.querySelector('.categoria').dataset.categoriaId;
+
+            // Atualize os campos do formulário no modal "Editar Prato"
+            document.getElementById('editarPratoId').value = pratoId;
+            document.getElementById('editarPratoNome').value = nome;
+            document.getElementById('editarPratoDescricao').value = descricao;
+            document.getElementById('editarPratoPreco').value = preco;
+            document.getElementById('editarPratoCategoria').value = categoriaId;
+
+            // Abra o modal "Editar Prato"
+            var editarPratoModal = document.getElementById("editarPratoModal");
+            editarPratoModal.style.display = "block";
+        }
+
+        function excluirPrato(pratoId) {
+            if (confirm("Deseja realmente excluir este prato?")) {
+                var form = document.createElement("form");
+                form.setAttribute("method", "post");
+                form.setAttribute("action", "excluir_prato_action.php");
+
+                var idField = document.createElement("input");
+                idField.setAttribute("type", "hidden");
+                idField.setAttribute("name", "id");
+                idField.setAttribute("value", pratoId);
+                form.appendChild(idField);
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+
+        document.querySelectorAll(".btn-excluir").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                excluirPrato(this.dataset.pratoId);
+            });
+        });
+
+        function salvarPrato() {
+            var pratoId = document.getElementById('prato-form').getAttribute('data-id');
+            var nome = document.getElementById('nome').value;
+            var descricao = document.getElementById('descricao').value;
+            var preco = document.getElementById('preco').value;
+            var categoriaId = document.getElementById('categoria').value;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    location.reload();
+                }
+            };
+
+            if (pratoId) { // Editar prato existente
+                xhttp.open("POST", "editar_prato_action.php", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("id=" + pratoId + "&nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria=" + categoriaId);
+            } else { // Adicionar novo prato
+                xhttp.open("POST", "adicionar_prato_action.php", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria=" + categoriaId);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
