@@ -42,8 +42,6 @@ if (isset($_GET['restaurante_id'])) {
 </head>
 
 <body>
-    <h1>Cardápio</h1>
-
     <div class="container">
         <h1>Cardápio</h1>
         <div class="row">
