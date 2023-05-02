@@ -1,68 +1,59 @@
-@import 'colors.css';
-
 body {
     font-family: Arial, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
 }
 
 h1 {
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 15px;
-    margin-bottom: 30px;
-    border-radius: 10px;
     text-align: center;
-}
-
-h2 {
-    margin-bottom: 15px;
-}
-
-section {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
     margin-bottom: 20px;
 }
 
-strong {
+section {
+    margin-bottom: 40px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
     font-weight: bold;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+table td {
+    white-space: nowrap;
 }
 
-li {
-    margin-bottom: 10px;
+table td button {
+    margin-right: 5px;
 }
 
-.btn-criar-cardapio {
-    display: inline-block;
-    margin: 15px 0;
-    padding: 10px 15px;
-    background-color: var(--primary-color);
-    color: #ffffff;
-    font-weight: bold;
+.adicionarPratoBtn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
     text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
     border-radius: 5px;
-}
-
-.btn-criar-cardapio:hover {
-    background-color: var(--submit-hover-color);
 }
 
 .modal {
     display: none;
     position: fixed;
     z-index: 1;
+    padding-top: 100px;
     left: 0;
     top: 0;
     width: 100%;
@@ -73,80 +64,31 @@ li {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: auto;
     padding: 20px;
-    border: 1px solid var(--input-border-color);
-    width: 60%;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
 }
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-title {
-    font-size: 24px;
-    margin: 0;
-}
-
-/* .close {
+.close {
     color: #aaaaaa;
+    float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-} */
-
-/* form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-} */
-
-input,
-textarea,
-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid var(--input-border-color);
-    border-radius: 5px;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-    border-color: var(--primary-color);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(254, 121, 63, 0.6);
+form div {
+    margin-bottom: 10px;
 }
 
-button[type="submit"],
-button[type="button"],
-button[type="adicionarPratoBtn"] {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: #ffffff;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button[type="submit"]:hover,
-button[type="button"]:hover {
-    background-color: var(--submit-hover-color);
+form label {
+    display: block;
+    margin-bottom: 5px;
 }
