@@ -152,26 +152,26 @@
             <span class="close">&times;</span>
             <h5>Editar Prato</h5>
             <form action="editar_prato_action.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" id="pratoId" name="id">
+                <input type="hidden" id="editarPratoId" name="id">
                 <div>
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="nome" required>
+                    <label for="editarPratoNome">Nome</label>
+                    <input type="text" id="editarPratoNome" name="nome" required>
                 </div>
                 <div>
-                    <label for="descricao">Descrição</label>
-                    <textarea id="descricao" name="descricao" rows="3"></textarea>
+                    <label for="editarPratoDescricao">Descrição</label>
+                    <textarea id="editarPratoDescricao" name="descricao" rows="3"></textarea>
                 </div>
                 <div>
                     <label for="imagem">Imagem (opcional)</label>
                     <input type="file" id="imagem" name="imagem">
                 </div>
                 <div>
-                    <label for="preco">Preço</label>
-                    <input type="number" step="0.01" id="preco" name="preco" required>
+                    <label for="editarPratoPreco">Preço</label>
+                    <input type="number" step="0.01" id="editarPratoPreco" name="preco" required>
                 </div>
                 <div>
-                    <label for="categoria">Categoria</label>
-                    <select id="categoria" name="categoria" required>
+                    <label for="editarPratoCategoria">Categoria</label>
+                    <select id="editarPratoCategoria" name="categoria" required>
                         <option value="entrada">Entrada</option>
                         <option value="petiscos">Petiscos</option>
                         <option value="pratos principais">Pratos Principais</option>
@@ -187,8 +187,8 @@
                 </div>
             </form>
         </div>
-
     </div>
+
 
     <script>
         // Pega o modal
@@ -214,8 +214,11 @@
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
+            } else if (event.target == editarPratoModal) {
+                editarPratoModal.style.display = "none";
             }
         }
+
 
         function editarPrato(event) {
             var pratoId = event.target.dataset.id;
@@ -225,17 +228,18 @@
             var preco = pratoRow.querySelector('.preco').textContent;
             var categoria = pratoRow.querySelector('.categoria').textContent;
 
-            document.getElementById('prato-form').setAttribute('data-id', pratoId);
-            document.getElementById('nome').value = nome;
-            document.getElementById('descricao').value = descricao;
-            document.getElementById('preco').value = preco;
-            document.getElementById('categoria').value = categoria;
+            // Atualize os campos do formulário no modal "Editar Prato"
+            document.getElementById('editarPratoId').value = pratoId;
+            document.getElementById('editarPratoNome').value = nome;
+            document.getElementById('editarPratoDescricao').value = descricao;
+            document.getElementById('editarPratoPreco').value = preco;
+            document.getElementById('editarPratoCategoria').value = document.getElementById('editarPratoCategoria').value = categoria;
 
-            // Atualizar o título do modal para "Editar Prato"
-            document.getElementById('modal-title').textContent = 'Editar Prato';
-
-            modal.style.display = "block";
+            // Abra o modal "Editar Prato"
+            var editarPratoModal = document.getElementById("editarPratoModal");
+            editarPratoModal.style.display = "block";
         }
+
 
 
 
