@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 // Verificar se o usuário está logado
 if (!isset($_SESSION['restaurante_id'])) {
     header("Location: login_restaurante.php");
