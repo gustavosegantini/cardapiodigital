@@ -28,7 +28,7 @@ if (isset($_GET['restaurante_id'])) {
 }
 
 // Restante do arquivo cardapio.php...
-
+?>
 
 <!DOCTYPE html>
 <html lang="en">
