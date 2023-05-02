@@ -184,7 +184,6 @@
                 modal.style.display = "none";
             }
         }
-
         function editarPrato(event) {
             var pratoId = event.target.dataset.id;
             var pratoRow = event.target.closest('tr');
@@ -196,7 +195,6 @@
             // ... (restante da função)
         }
 
-
         document.getElementById('prato-form').setAttribute('data-id', pratoId);
         document.getElementById('nome').value = nome;
         document.getElementById('descricao').value = descricao;
@@ -207,7 +205,7 @@
         document.getElementById('modal-title').textContent = 'Editar Prato';
 
         modal.style.display = "block";
-        }
+    }
         function salvarPrato() {
             var pratoId = document.getElementById('prato-form').getAttribute('data-id');
             var nome = document.getElementById('nome').value;
@@ -232,7 +230,6 @@
                 xhttp.send("nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria=" + categoria);
             }
         }
-
 
     </script>
 
