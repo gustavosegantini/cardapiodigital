@@ -213,3 +213,78 @@ button[type="button"]:hover {
 .btn-delete-dish:hover {
     color: var(--delete-hover-color);
 }
+
+/* Estilo da tabela */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.table th {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Estilo dos botões */
+#adicionarPratoBtn {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#adicionarPratoBtn:hover {
+    background-color: var(--submit-hover-color);
+}
+
+.btn-editar {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-editar:hover {
+    background-color: var(--secondary-hover-color);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover-color);
+}
