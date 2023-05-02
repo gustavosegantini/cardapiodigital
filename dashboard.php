@@ -284,7 +284,8 @@
             var nome = document.getElementById('nome').value;
             var descricao = document.getElementById('descricao').value;
             var preco = document.getElementById('preco').value;
-            var categoriaId = document.getElementById('categoria').value;
+            var categoriaSelect = document.getElementById('categoria');
+            var categoriaId = categoriaSelect.options[categoriaSelect.selectedIndex].value;
 
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
@@ -296,13 +297,14 @@
             if (pratoId) { // Editar prato existente
                 xhttp.open("POST", "editar_prato_action.php", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send("id=" + pratoId + "&nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria=" + categoriaId);
+                xhttp.send("id=" + pratoId + "&nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria_id=" + categoriaId);
             } else { // Adicionar novo prato
                 xhttp.open("POST", "adicionar_prato_action.php", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send("nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria=" + categoriaId);
+                xhttp.send("nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria_id=" + categoriaId);
             }
         }
+
     </script>
 
 </body>
