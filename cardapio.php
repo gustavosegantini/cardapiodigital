@@ -37,12 +37,12 @@
         return $nome;
     }
 
-    function obterPratosPorCategoria($restaurante_id, $categoria)
+    function obterPratosPorCategoria($restaurante_id, $categoria_id)
     {
         $conn = conectarBD();
-        $sql = "SELECT * FROM pratos WHERE restaurante_id = ? AND categoria = ?";
+        $sql = "SELECT * FROM pratos WHERE restaurante_id = ? AND categoria_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("is", $restaurante_id, $categoria);
+        $stmt->bind_param("ii", $restaurante_id, $categoria_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $pratos = $result->fetch_all(MYSQLI_ASSOC);
@@ -51,10 +51,18 @@
         return $pratos;
     }
 
-    // $restaurante_id = 1; // Você deve obter o ID do restaurante por outros meios, por exemplo, através de uma URL amigável
-    $nome_restaurante = obterNomeRestaurante($restaurante_id);
+    function obterCategorias()
+    {
+        $conn = conectarBD();
+        $sql = "SELECT * FROM categorias";
+        $result = $conn->query($sql);
+        $categorias = $result->fetch_all(MYSQLI_ASSOC);
+        $conn->close();
+        return $categorias;
+    }
 
-    $categorias = ["entrada"]; // Lista de categorias possíveis
+    $nome_restaurante = obterNomeRestaurante($restaurante_id);
+    $categorias = obterCategorias();
     ?>
 
     <h1>
@@ -64,10 +72,10 @@
     <div class="card-container">
         <?php
         foreach ($categorias as $categoria) {
-            $pratos = obterPratosPorCategoria($restaurante_id, $categoria);
+            $pratos = obterPratosPorCategoria($restaurante_id, $categoria["id"]);
 
             if (count($pratos) > 0) {
-                echo "<h2>{$categoria}</h2>";
+                echo "<h2>{$categoria['nome']}</h2>";
 
                 foreach ($pratos as $prato) {
                     echo '<div class="card">';
