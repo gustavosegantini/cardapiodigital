@@ -74,7 +74,7 @@
         // Busca pratos do restaurante
         $conn = conectarBD();
         $sql = "SELECT pratos.*, categorias.nome AS categoria_nome FROM pratos JOIN categorias ON pratos.categoria_id = categorias.id WHERE restaurante_id = $restaurante_id";
-$result_pratos = $conn->query($sql);
+        $result_pratos = $conn->query($sql);
 
         $conn->close();
         ?>
@@ -102,12 +102,16 @@ $result_pratos = $conn->query($sql);
                             <td class="preco">
                                 <?= number_format($prato['preco'], 2, ',', '.') ?>
                             </td>
-                            <td class="categoria">
-                                <?= $prato['categoria'] ?>
+                            <td class="categoria" data-id="<?= $prato['categoria_id'] ?>">
+                                <?= $prato['categoria_nome'] ?>
                             </td>
+
+
+
                             <td>
-                                <button data-id="<?= $prato['id'] ?>" class="btn-editar"
-                                    onclick="editarPrato(event)">Editar</button>
+                                <!-- Remova o atributo onclick daqui -->
+                                <button data-id="<?= $prato['id'] ?>" class="btn-editar">Editar</button>
+
 
                                 <button class="btn btn-danger btn-excluir"
                                     data-prato-id="<?= $prato['id'] ?>">Excluir</button>
@@ -147,13 +151,14 @@ $result_pratos = $conn->query($sql);
                 <div>
                     <label for="categoria">Categoria</label>
                     <select id="categoria" name="categoria" required>
-                        <option value="entrada">Entrada</option>
-                        <option value="petiscos">Petiscos</option>
-                        <option value="pratos principais">Pratos Principais</option>
-                        <option value="bebidas">Bebidas</option>
-                        <option value="sobremesas">Sobremesas</option>
-                        <option value="carta de vinhos">Carta de Vinhos</option>
+                        <?php
+                        $categorias = obterCategorias();
+                        foreach ($categorias as $categoria) {
+                            echo "<option value='{$categoria['id']}'>{$categoria['nome']}</option>";
+                        }
+                        ?>
                     </select>
+
                 </div>
                 <div>
                     <button type="button"
@@ -189,14 +194,15 @@ $result_pratos = $conn->query($sql);
                 </div>
                 <div>
                     <label for="editarPratoCategoria">Categoria</label>
-                    <select id="editarPratoCategoria" name="categoria" required>
-                        <option value="entrada">Entrada</option>
-                        <option value="petiscos">Petiscos</option>
-                        <option value="pratos principais">Pratos Principais</option>
-                        <option value="bebidas">Bebidas</option>
-                        <option value="sobremesas">Sobremesas</option>
-                        <option value="carta de vinhos">Carta de Vinhos</option>
+                    <select id="categoria" name="categoria" required>
+                        <?php
+                        $categorias = obterCategorias();
+                        foreach ($categorias as $categoria) {
+                            echo "<option value='{$categoria['id']}'>{$categoria['nome']}</option>";
+                        }
+                        ?>
                     </select>
+
                 </div>
                 <div>
                     <button type="button"
@@ -212,11 +218,15 @@ $result_pratos = $conn->query($sql);
         // Pega o modal
         var modal = document.getElementById("adicionarPratoModal");
 
+        // Pega o modal de edição
+        var editarPratoModal = document.getElementById("editarPratoModal");
+
         // Pega o botão que abre o modal
         var btn = document.getElementById("adicionarPratoBtn");
 
         // Pega o elemento <span> que fecha o modal
         var span = document.getElementsByClassName("close")[0];
+
 
         // Quando o usuário clicar no botão, abra o modal
         btn.onclick = function () {
@@ -243,7 +253,8 @@ $result_pratos = $conn->query($sql);
             var nome = pratoRow.querySelector('.nome').textContent.trim();
             var descricao = pratoRow.querySelector('.descricao').textContent.trim();
             var preco = parseFloat(pratoRow.querySelector('.preco').textContent.replace('.', '').replace(',', '.'));
-            var categoriaId = pratoRow.querySelector('.categoria').textContent.trim();
+            var categoriaId = pratoRow.querySelector('.categoria').dataset.id;
+
 
 
             // Atualize os campos do formulário no modal "Editar Prato"
@@ -256,6 +267,7 @@ $result_pratos = $conn->query($sql);
             // Abra o modal "Editar Prato"
             var editarPratoModal = document.getElementById("editarPratoModal");
             editarPratoModal.style.display = "block";
+
         }
 
         function excluirPrato(pratoId) {
@@ -306,6 +318,9 @@ $result_pratos = $conn->query($sql);
                 xhttp.send("nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria_id=" + categoriaId);
             }
         }
+        document.querySelectorAll(".btn-editar").forEach(function (btn) {
+            btn.addEventListener("click", editarPrato);
+        });
 
     </script>
 
