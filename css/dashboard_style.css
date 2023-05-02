@@ -131,7 +131,8 @@ select:focus {
 }
 
 button[type="submit"],
-button[type="button"] {
+button[type="button"],
+button[type="adicionarPratoBtn"] {
     display: inline-block;
     margin-top: 10px;
     padding: 10px 20px;
