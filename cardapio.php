@@ -54,7 +54,7 @@
     // $restaurante_id = 1; // Você deve obter o ID do restaurante por outros meios, por exemplo, através de uma URL amigável
     $nome_restaurante = obterNomeRestaurante($restaurante_id);
 
-    $categorias = ["Entradas", "Pratos Principais", "Bebidas", "Sobremesas"]; // Lista de categorias possíveis
+    $categorias = ["entrada"]; // Lista de categorias possíveis
     ?>
 
     <h1>
