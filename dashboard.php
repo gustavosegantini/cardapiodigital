@@ -56,6 +56,7 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adicionarPratoModal">
             + Adicionar Prato
         </button>
+
     </section>
 
     <!-- Modal Adicionar Prato -->
@@ -114,4 +115,3 @@
 </body>
 
 </html>
-```
