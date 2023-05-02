@@ -67,25 +67,12 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <td class="nome">
-                            <?= $prato['nome'] ?>
-                        </td>
-                        <td class="descricao">
-                            <?= $prato['descricao'] ?>
-                        </td>
-                        <td class="preco">
-                            <?= number_format($prato['preco'], 2, ',', '.') ?>
-                        </td>
-                        <td class="categoria">
-                            <?= $prato['categoria'] ?>
-                        </td>
-                        <td>
-                            <button data-id="<?= $prato['id'] ?>" class="btn-editar"
-                                onclick="editarPrato(event)">Editar</button>
-                            <button class="btn btn-danger" data-prato-id="<?= $prato['id'] ?>">Excluir</button>
-                        </td>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
                     </tr>
-
                 </thead>
                 <tbody>
                     <?php while ($prato = $result_pratos->fetch_assoc()): ?>
@@ -184,28 +171,26 @@
                 modal.style.display = "none";
             }
         }
+
         function editarPrato(event) {
             var pratoId = event.target.dataset.id;
             var pratoRow = event.target.closest('tr');
             var nome = pratoRow.querySelector('.nome').textContent;
             var descricao = pratoRow.querySelector('.descricao').textContent;
-            var preco = parseFloat(pratoRow.querySelector('.preco').textContent.replace(',', '.'));
+            var preco = pratoRow.querySelector('.preco').textContent;
             var categoria = pratoRow.querySelector('.categoria').textContent;
 
-            // ... (restante da função)
+            document.getElementById('prato-form').setAttribute('data-id', pratoId);
+            document.getElementById('nome').value = nome;
+            document.getElementById('descricao').value = descricao;
+            document.getElementById('preco').value = preco;
+            document.getElementById('categoria').value = categoria;
+
+            // Atualizar o título do modal para "Editar Prato"
+            document.getElementById('modal-title').textContent = 'Editar Prato';
+
+            modal.style.display = "block";
         }
-
-        document.getElementById('prato-form').setAttribute('data-id', pratoId);
-        document.getElementById('nome').value = nome;
-        document.getElementById('descricao').value = descricao;
-        document.getElementById('preco').value = preco;
-        document.getElementById('categoria').value = categoria;
-
-        // Atualizar o título do modal para "Editar Prato"
-        document.getElementById('modal-title').textContent = 'Editar Prato';
-
-        modal.style.display = "block";
-    }
         function salvarPrato() {
             var pratoId = document.getElementById('prato-form').getAttribute('data-id');
             var nome = document.getElementById('nome').value;
@@ -230,6 +215,7 @@
                 xhttp.send("nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria=" + categoria);
             }
         }
+
 
     </script>
 
