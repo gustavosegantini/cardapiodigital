@@ -4,7 +4,8 @@ error_reporting(E_ALL);
 
 require '../conect.php';
 
-function obterPratos($restaurante_id) {
+function obterPratos($restaurante_id)
+{
     $conn = conectarBD();
     $sql = "SELECT * FROM pratos WHERE restaurante_id = ?";
     $stmt = $conn->prepare($sql);
@@ -32,25 +33,45 @@ if (isset($_GET['restaurante_id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>Cardápio</title>
 </head>
+
 <body>
     <h1>Cardápio</h1>
-
-    <?php foreach ($pratos as $prato) { ?>
-        <div>
-            <h2><?php echo $prato["nome"]; ?></h2>
-            <p><?php echo $prato["descricao"]; ?></p>
-            <p>Preço: <?php echo $prato["preco"]; ?></p>
-            <p>Categoria: <?php echo $prato["categoria"]; ?></p>
-            <?php if ($prato["imagem"] !== null) { ?>
-                <img src="<?php echo $prato["imagem"]; ?>" alt="<?php echo $prato["nome"]; ?>">
-            <?php } ?>
+    <div class="container">
+        <h1 class="text-center mt-4 mb-4">Cardápio</h1>
+        <div class="row">
+            <?php foreach ($pratos as $prato): ?>
+                <div class="col-md-4 col-sm-6 col-12 mb-4">
+                    <div class="card">
+                        <?php if ($prato['imagem']): ?>
+                            <img src="<?php echo $prato['imagem']; ?>" class="card-img-top"
+                                alt="<?php echo htmlspecialchars($prato['nome']); ?>">
+                        <?php endif; ?>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <?php echo htmlspecialchars($prato['nome']); ?>
+                            </h5>
+                            <p class="card-text">
+                                <?php echo htmlspecialchars($prato['descricao']); ?>
+                            </p>
+                            <p class="card-text">Preço: R$
+                                <?php echo number_format($prato['preco'], 2, ',', '.'); ?>
+                            </p>
+                            <p class="card-text">Categoria:
+                                <?php echo htmlspecialchars($prato['categoria']); ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
-    <?php } ?>
+    </div>
 </body>
+
 </html>
