@@ -17,7 +17,7 @@ $restaurante_id = $_SESSION['restaurante_id'];
 $nome = $_POST['nome'];
 $descricao = $_POST['descricao'];
 $preco = $_POST['preco'];
-$categoria_id = $_POST['categoria_id'];
+$categoria_id = isset($_POST['categoria_id']) ? $_POST['categoria_id'] : null;
 
 // Lidar com o upload de imagem (opcional)
 $imagem = null;
@@ -62,7 +62,7 @@ if (isset($_FILES['imagem']) && $_FILES['imagem']['size'] > 0) {
 // Inserir o prato no banco de dados
 $sql = "INSERT INTO pratos (restaurante_id, nome, descricao, imagem, preco, categoria_id) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("issssid", $restaurante_id, $nome, $descricao, $imagem, $preco, $categoria_id);
+$stmt->bind_param("issssii", $restaurante_id, $nome, $descricao, $imagem, $preco, $categoria_id);
 
 if ($stmt->execute()) {
     // Redirecionar para o dashboard
