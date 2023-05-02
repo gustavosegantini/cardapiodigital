@@ -150,8 +150,8 @@
     <div id="editarPratoModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h5 id="modal-title">Editar Prato</h5>
-            <form id="prato-form" action="editar_prato_action.php" method="post" enctype="multipart/form-data">
+            <h5>Editar Prato</h5>
+            <form action="editar_prato_action.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" id="pratoId" name="id">
                 <div>
                     <label for="nome">Nome</label>
