@@ -37,6 +37,7 @@ if (isset($_GET['restaurante_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="css/cardapio_style.css">
     <title>Cardápio</title>
 </head>
@@ -66,7 +67,5 @@ if (isset($_GET['restaurante_id'])) {
             <?php endforeach; ?>
         </div>
     </div>
-
 </body>
-
 </html>
