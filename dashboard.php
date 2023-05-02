@@ -130,14 +130,12 @@
                 </div>
                 <div>
                     <label for="categoria">Categoria</label>
-                    <select id="categoria" name="categoria" required>
-                        <option value="entrada">Entrada</option>
-                        <option value="petiscos">Petiscos</option>
-                        <option value="pratos principais">Pratos Principais</option>
-                        <option value="bebidas">Bebidas</option>
-                        <option value="sobremesas">Sobremesas</option>
-                        <option value="carta de vinhos">Carta de Vinhos</option>
+                    <select name="categoria_id">
+                        <?php foreach ($categorias as $categoria): ?>
+                            <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nome']; ?></option>
+                        <?php endforeach; ?>
                     </select>
+
                 </div>
                 <div>
                     <button type="button"
