@@ -48,7 +48,7 @@ li {
     display: inline-block;
     margin: 15px 0;
     padding: 10px 15px;
-    background-color: #fe793f;
+    background-color: var(--primary-color);
     color: #ffffff;
     font-weight: bold;
     text-decoration: none;
@@ -56,7 +56,7 @@ li {
 }
 
 .btn-criar-cardapio:hover {
-    background-color: #fd6530;
+    background-color: var(--submit-hover-color);
 }
 
 .modal {
@@ -75,7 +75,7 @@ li {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid var(--input-border-color);
     width: 80%;
 }
 
