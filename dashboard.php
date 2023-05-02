@@ -217,11 +217,15 @@
         // Pega o modal
         var modal = document.getElementById("adicionarPratoModal");
 
+        // Pega o modal de edição
+        var editarPratoModal = document.getElementById("editarPratoModal");
+
         // Pega o botão que abre o modal
         var btn = document.getElementById("adicionarPratoBtn");
 
         // Pega o elemento <span> que fecha o modal
         var span = document.getElementsByClassName("close")[0];
+
 
         // Quando o usuário clicar no botão, abra o modal
         btn.onclick = function () {
