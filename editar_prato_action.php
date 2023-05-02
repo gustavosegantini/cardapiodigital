@@ -3,7 +3,6 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// require 'config.php';
 require '../conect.php';
 
 // Atualizar informações do prato no banco de dados
