@@ -64,7 +64,6 @@ $sql = "INSERT INTO pratos (restaurante_id, nome, descricao, imagem, preco, cate
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("isssdii", $restaurante_id, $nome, $descricao, $imagem, $preco, $categoria_id);
 
-
 if ($stmt->execute()) {
     // Redirecionar para o dashboard
     header("Location: dashboard.php?msg=Prato adicionado com sucesso!");
