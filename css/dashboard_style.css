@@ -44,7 +44,7 @@ li {
     margin-bottom: 10px;
 }
 
-.btn-criar-cardapio {
+.adicionarPratoBtn {
     display: inline-block;
     margin: 15px 0;
     padding: 10px 15px;
@@ -55,7 +55,7 @@ li {
     border-radius: 5px;
 }
 
-.btn-criar-cardapio:hover {
+.adicionarPratoBtn:hover {
     background-color: var(--submit-hover-color);
 }
 
