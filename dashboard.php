@@ -322,6 +322,7 @@
             btn.addEventListener("click", editarPrato);
         });
 
+
     </script>
 
 </body>
