@@ -13,6 +13,15 @@
     <?php
     require_once '../conect.php';
 
+    $restaurante_id = isset($_GET['restaurante_id']) ? (int) $_GET['restaurante_id'] : 0;
+    if ($restaurante_id === 0) {
+        // Lidar com o caso em que o ID do restaurante não foi fornecido ou é inválido
+        echo "O ID do restaurante não foi fornecido ou é inválido.";
+        exit;
+    }
+
+    $nome_restaurante = obterNomeRestaurante($restaurante_id);
+
     function obterNomeRestaurante($restaurante_id)
     {
         $conn = conectarBD();
@@ -42,13 +51,7 @@
         return $pratos;
     }
 
-    // Obter o restaurante_id do parâmetro GET
-    if (isset($_GET['restaurante_id'])) {
-        $restaurante_id = intval($_GET['restaurante_id']);
-        $pratos = obterPratos($restaurante_id);
-    } else {
-        die("Nenhum restaurante selecionado.");
-    } // Você deve obter o ID do restaurante por outros meios, por exemplo, através de uma URL amigável
+    // $restaurante_id = 1; // Você deve obter o ID do restaurante por outros meios, por exemplo, através de uma URL amigável
     $nome_restaurante = obterNomeRestaurante($restaurante_id);
 
     $categorias = ["Entradas", "Pratos Principais", "Bebidas", "Sobremesas"]; // Lista de categorias possíveis
