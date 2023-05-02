@@ -223,10 +223,10 @@
         function editarPrato(event) {
             var pratoId = event.target.dataset.id;
             var pratoRow = event.target.closest('tr');
-            var nome = pratoRow.querySelector('.nome').textContent;
-            var descricao = pratoRow.querySelector('.descricao').textContent;
+            var nome = pratoRow.querySelector('.nome').textContent.trim();
+            var descricao = pratoRow.querySelector('.descricao').textContent.trim();
             var preco = parseFloat(pratoRow.querySelector('.preco').textContent.replace('.', '').replace(',', '.'));
-            var categoria = pratoRow.querySelector('.categoria').textContent;
+            var categoria = pratoRow.querySelector('.categoria').textContent.trim();
 
             // Atualize os campos do formulário no modal "Editar Prato"
             document.getElementById('editarPratoId').value = pratoId;
@@ -239,6 +239,7 @@
             var editarPratoModal = document.getElementById("editarPratoModal");
             editarPratoModal.style.display = "block";
         }
+
 
 
 
