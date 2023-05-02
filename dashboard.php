@@ -102,9 +102,10 @@
                             <td class="preco">
                                 <?= number_format($prato['preco'], 2, ',', '.') ?>
                             </td>
-                            <td class="categoria">
+                            <td class="categoria" data-id="<?= $prato['categoria_id'] ?>">
                                 <?= $prato['categoria_nome'] ?>
                             </td>
+
 
 
                             <td>
@@ -247,7 +248,8 @@
             var nome = pratoRow.querySelector('.nome').textContent.trim();
             var descricao = pratoRow.querySelector('.descricao').textContent.trim();
             var preco = parseFloat(pratoRow.querySelector('.preco').textContent.replace('.', '').replace(',', '.'));
-            var categoriaId = pratoRow.querySelector('.categoria').textContent.trim();
+            var categoriaId = pratoRow.querySelector('.categoria').dataset.id;
+
 
 
             // Atualize os campos do formulário no modal "Editar Prato"
