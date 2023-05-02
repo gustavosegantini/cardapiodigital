@@ -44,7 +44,6 @@ li {
     margin-bottom: 10px;
 }
 
-
 .btn-criar-cardapio {
     display: inline-block;
     margin: 15px 0;
@@ -59,6 +58,7 @@ li {
 .btn-criar-cardapio:hover {
     background-color: #fd6530;
 }
+
 .modal {
     display: none;
     position: fixed;
