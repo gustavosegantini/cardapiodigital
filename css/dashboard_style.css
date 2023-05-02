@@ -130,7 +130,7 @@ li {
 .modal button[type="button"] {
     background-color: #ccc;
     border-color: #ccc;
-    color: #333;
+    color: var(--text-color);
     font-weight: bold;
     padding: 10px 15px;
     border-radius: 5px;
