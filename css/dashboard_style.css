@@ -79,7 +79,7 @@ li {
 
 .modal-content {
     background-color: #fff;
-    margin: 5% auto;
+    /* margin: 5% auto; */
     padding: 30px;
     border: 1px solid var(--input-border-color);
     width: 60%;
