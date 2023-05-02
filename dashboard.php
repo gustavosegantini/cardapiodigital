@@ -67,25 +67,12 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <td class="nome">
-                            <?= $prato['nome'] ?>
-                        </td>
-                        <td class="descricao">
-                            <?= $prato['descricao'] ?>
-                        </td>
-                        <td class="preco">
-                            <?= number_format($prato['preco'], 2, ',', '.') ?>
-                        </td>
-                        <td class="categoria">
-                            <?= $prato['categoria'] ?>
-                        </td>
-                        <td>
-                            <button data-id="<?= $prato['id'] ?>" class="btn-editar"
-                                onclick="editarPrato(event)">Editar</button>
-                            <button class="btn btn-danger" data-prato-id="<?= $prato['id'] ?>">Excluir</button>
-                        </td>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
                     </tr>
-
                 </thead>
                 <tbody>
                     <?php while ($prato = $result_pratos->fetch_assoc()): ?>
@@ -238,15 +225,16 @@
             var preco = pratoRow.querySelector('.preco').textContent;
             var categoria = pratoRow.querySelector('.categoria').textContent;
 
-            // Atualize os campos do formulário no modal "Editar Prato"
-            document.getElementById('editarPratoId').value = pratoId;
-            document.getElementById('editarPratoNome').value = nome;
-            document.getElementById('editarPratoDescricao').value = descricao;
-            document.getElementById('editarPratoPreco').value = preco;
-            document.getElementById('editarPratoCategoria').value = categoria;
+            document.getElementById('prato-form').setAttribute('data-id', pratoId);
+            document.getElementById('nome').value = nome;
+            document.getElementById('descricao').value = descricao;
+            document.getElementById('preco').value = preco;
+            document.getElementById('categoria').value = categoria;
 
-            // Abre o modal de edição
-            document.getElementById('editarPratoModal').style.display = "block";
+            // Atualizar o título do modal para "Editar Prato"
+            document.getElementById('modal-title').textContent = 'Editar Prato';
+
+            modal.style.display = "block";
         }
 
 
