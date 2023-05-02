@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Restaurante</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3s4GmPkkD/0/1jMNKx" crossorigin="anonymous">
     <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="css/dashboard_style.css"> <!-- Adicione seu arquivo de estilo CSS aqui -->
 </head>
@@ -36,15 +38,6 @@
         exit();
     }
 
-    // Busca cardápios do restaurante
-    $sql = "SELECT * FROM cardapios WHERE restaurante_id = $restaurante_id";
-    $result = $conn->query($sql);
-
-    $cardapios = [];
-    while ($row = $result->fetch_assoc()) {
-        $cardapios[] = $row;
-    }
-
     $conn->close();
     ?>
 
@@ -59,23 +52,11 @@
     </section>
 
     <section>
-        <h2>Cardápios</h2>
+        <h2>Pratos</h2>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adicionarPratoModal">
             + Adicionar Prato
         </button>
-        <ul>
-            <?php
-            if (count($cardapios) > 0) {
-                foreach ($cardapios as $cardapio) {
-                    echo "<li>" . $cardapio['nome'] . "</li>";
-                }
-            } else {
-                echo "<p>Nenhum cardápio encontrado.</p>";
-            }
-            ?>
-        </ul>
     </section>
-
 
     <!-- Modal Adicionar Prato -->
     <div class="modal fade" id="adicionarPratoModal" tabindex="-1" aria-labelledby="adicionarPratoModalLabel"
@@ -124,7 +105,13 @@
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz4fnFO9gybB+XG/7CwFqlB6t8H6fX1lqFFudGq3DycvbG8I2Q4U+Soz6N"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
+```
