@@ -73,10 +73,10 @@ li {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    /* margin: 15% auto; */
     padding: 20px;
     border: 1px solid var(--input-border-color);
-    width: 50%;
+    width: 80%;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
