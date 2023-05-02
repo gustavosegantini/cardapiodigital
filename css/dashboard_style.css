@@ -65,7 +65,7 @@ li {
     z-index: 1;
     left: 0;
     top: 0;
-    width: 120%;
+    width: 100%;
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
@@ -76,7 +76,7 @@ li {
     margin: 15% auto;
     padding: 20px;
     border: 1px solid var(--input-border-color);
-    width: 60%;
+    width: 50%;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -115,7 +115,7 @@ input,
 textarea,
 select {
     width: 100%;
-    padding: 5px;
+    padding: 10px;
     margin-bottom: 20px;
     border: 1px solid var(--input-border-color);
     border-radius: 5px;
