@@ -73,9 +73,8 @@
         <?php
         // Busca pratos do restaurante
         $conn = conectarBD();
-        $sql = "SELECT pratos.*, categorias.nome AS categoria_nome FROM pratos JOIN categorias ON pratos.categoria_id = categorias.id WHERE restaurante_id = $restaurante_id";
+        $sql = "SELECT * FROM pratos WHERE restaurante_id = $restaurante_id";
         $result_pratos = $conn->query($sql);
-
         $conn->close();
         ?>
 
@@ -102,16 +101,12 @@
                             <td class="preco">
                                 <?= number_format($prato['preco'], 2, ',', '.') ?>
                             </td>
-                            <td class="categoria" data-id="<?= $prato['categoria_id'] ?>">
-                                <?= $prato['categoria_nome'] ?>
+                            <td class="categoria">
+                                <?= $prato['categoria'] ?>
                             </td>
-
-
-
                             <td>
-                                <!-- Remova o atributo onclick daqui -->
-                                <button data-id="<?= $prato['id'] ?>" class="btn-editar">Editar</button>
-
+                                <button data-id="<?= $prato['id'] ?>" class="btn-editar"
+                                    onclick="editarPrato(event)">Editar</button>
 
                                 <button class="btn btn-danger btn-excluir"
                                     data-prato-id="<?= $prato['id'] ?>">Excluir</button>
@@ -151,14 +146,13 @@
                 <div>
                     <label for="categoria">Categoria</label>
                     <select id="categoria" name="categoria" required>
-                        <?php
-                        $categorias = obterCategorias();
-                        foreach ($categorias as $categoria) {
-                            echo "<option value='{$categoria['id']}'>{$categoria['nome']}</option>";
-                        }
-                        ?>
+                        <option value="entrada">Entrada</option>
+                        <option value="petiscos">Petiscos</option>
+                        <option value="pratos principais">Pratos Principais</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="sobremesas">Sobremesas</option>
+                        <option value="carta de vinhos">Carta de Vinhos</option>
                     </select>
-
                 </div>
                 <div>
                     <button type="button"
@@ -194,15 +188,14 @@
                 </div>
                 <div>
                     <label for="editarPratoCategoria">Categoria</label>
-                    <select id="categoria" name="categoria" required>
-                        <?php
-                        $categorias = obterCategorias();
-                        foreach ($categorias as $categoria) {
-                            echo "<option value='{$categoria['id']}'>{$categoria['nome']}</option>";
-                        }
-                        ?>
+                    <select id="editarPratoCategoria" name="categoria" required>
+                        <option value="entrada">Entrada</option>
+                        <option value="petiscos">Petiscos</option>
+                        <option value="pratos principais">Pratos Principais</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="sobremesas">Sobremesas</option>
+                        <option value="carta de vinhos">Carta de Vinhos</option>
                     </select>
-
                 </div>
                 <div>
                     <button type="button"
@@ -218,15 +211,11 @@
         // Pega o modal
         var modal = document.getElementById("adicionarPratoModal");
 
-        // Pega o modal de edição
-        var editarPratoModal = document.getElementById("editarPratoModal");
-
         // Pega o botão que abre o modal
         var btn = document.getElementById("adicionarPratoBtn");
 
         // Pega o elemento <span> que fecha o modal
         var span = document.getElementsByClassName("close")[0];
-
 
         // Quando o usuário clicar no botão, abra o modal
         btn.onclick = function () {
@@ -253,9 +242,7 @@
             var nome = pratoRow.querySelector('.nome').textContent.trim();
             var descricao = pratoRow.querySelector('.descricao').textContent.trim();
             var preco = parseFloat(pratoRow.querySelector('.preco').textContent.replace('.', '').replace(',', '.'));
-            var categoriaId = pratoRow.querySelector('.categoria').dataset.id;
-
-
+            var categoriaId = pratoRow.querySelector('.categoria').dataset.categoriaId;
 
             // Atualize os campos do formulário no modal "Editar Prato"
             document.getElementById('editarPratoId').value = pratoId;
@@ -267,7 +254,6 @@
             // Abra o modal "Editar Prato"
             var editarPratoModal = document.getElementById("editarPratoModal");
             editarPratoModal.style.display = "block";
-
         }
 
         function excluirPrato(pratoId) {
@@ -298,8 +284,7 @@
             var nome = document.getElementById('nome').value;
             var descricao = document.getElementById('descricao').value;
             var preco = document.getElementById('preco').value;
-            var categoriaSelect = document.getElementById('categoria');
-            var categoriaId = categoriaSelect.options[categoriaSelect.selectedIndex].value;
+            var categoriaId = document.getElementById('categoria').value;
 
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
@@ -311,18 +296,13 @@
             if (pratoId) { // Editar prato existente
                 xhttp.open("POST", "editar_prato_action.php", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send("id=" + pratoId + "&nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria_id=" + categoriaId);
+                xhttp.send("id=" + pratoId + "&nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria=" + categoriaId);
             } else { // Adicionar novo prato
                 xhttp.open("POST", "adicionar_prato_action.php", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send("nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria_id=" + categoriaId);
+                xhttp.send("nome=" + nome + "&descricao=" + descricao + "&preco=" + preco + "&categoria=" + categoriaId);
             }
         }
-        document.querySelectorAll(".btn-editar").forEach(function (btn) {
-            btn.addEventListener("click", editarPrato);
-        });
-
-
     </script>
 
 </body>
