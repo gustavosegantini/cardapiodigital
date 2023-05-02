@@ -103,8 +103,9 @@
                                 <?= number_format($prato['preco'], 2, ',', '.') ?>
                             </td>
                             <td class="categoria">
-                                <?= $prato['nome'] ?>
+                                <?= $prato['categoria_nome'] ?>
                             </td>
+
 
                             <td>
                                 <button data-id="<?= $prato['id'] ?>" class="btn-editar"
@@ -148,13 +149,14 @@
                 <div>
                     <label for="categoria">Categoria</label>
                     <select id="categoria" name="categoria" required>
-                        <option value="entrada">Entrada</option>
-                        <option value="petiscos">Petiscos</option>
-                        <option value="pratos principais">Pratos Principais</option>
-                        <option value="bebidas">Bebidas</option>
-                        <option value="sobremesas">Sobremesas</option>
-                        <option value="carta de vinhos">Carta de Vinhos</option>
+                        <?php
+                        $categorias = obterCategorias();
+                        foreach ($categorias as $categoria) {
+                            echo "<option value='{$categoria['id']}'>{$categoria['nome']}</option>";
+                        }
+                        ?>
                     </select>
+
                 </div>
                 <div>
                     <button type="button"
@@ -190,14 +192,15 @@
                 </div>
                 <div>
                     <label for="editarPratoCategoria">Categoria</label>
-                    <select id="editarPratoCategoria" name="categoria" required>
-                        <option value="entrada">Entrada</option>
-                        <option value="petiscos">Petiscos</option>
-                        <option value="pratos principais">Pratos Principais</option>
-                        <option value="bebidas">Bebidas</option>
-                        <option value="sobremesas">Sobremesas</option>
-                        <option value="carta de vinhos">Carta de Vinhos</option>
+                    <select id="categoria" name="categoria" required>
+                        <?php
+                        $categorias = obterCategorias();
+                        foreach ($categorias as $categoria) {
+                            echo "<option value='{$categoria['id']}'>{$categoria['nome']}</option>";
+                        }
+                        ?>
                     </select>
+
                 </div>
                 <div>
                     <button type="button"
