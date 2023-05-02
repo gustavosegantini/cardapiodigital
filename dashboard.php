@@ -90,7 +90,8 @@
                                 <?= $prato['categoria'] ?>
                             </td>
                             <td>
-                                <button class="btn btn-warning" data-prato-id="<?= $prato['id'] ?>">Editar</button>
+                            <a href="editar_prato.php?id=<?= $prato['id'] ?>" class="
+
                                 <button class="btn btn-danger" data-prato-id="<?= $prato['id'] ?>">Excluir</button>
                             </td>
                         </tr>
