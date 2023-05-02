@@ -256,7 +256,7 @@ button[type="button"]:hover {
 
 .btn-editar {
     background-color: var(--secondary-color);
-    color: #fff;
+    color: var(--primary-hover-color);
     border: none;
     padding: 5px 10px;
     text-align: center;
