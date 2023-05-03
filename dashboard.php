@@ -109,12 +109,12 @@
 
 
                             <td>
-                                <<button data-id="<?= $prato['id'] ?>" class="btn-editar">Editar</button>
+
+                                <button data-id="<?= $prato['id'] ?>" class="btn-editar">Editar</button>
 
 
-
-                                    <button class="btn btn-danger btn-excluir"
-                                        data-prato-id="<?= $prato['id'] ?>">Excluir</button>
+                                <button class="btn btn-danger btn-excluir"
+                                    data-prato-id="<?= $prato['id'] ?>">Excluir</button>
 
                             </td>
                         </tr>
@@ -150,7 +150,8 @@
                 </div>
                 <div>
                     <label for="categoria">Categoria</label>
-                    <select id="categoria" name="categoria" required>
+                    <select id="editarPratoCategoria" name="categoria" required>
+
                         <?php
                         $categorias = obterCategorias();
                         foreach ($categorias as $categoria) {
@@ -194,7 +195,7 @@
                 </div>
                 <div>
                     <label for="editarPratoCategoria">Categoria</label>
-                    <select id="categoria" name="categoria" required>
+                    <select id="editarPratoCategoria" name="categoria" required>
                         <?php
                         $categorias = obterCategorias();
                         foreach ($categorias as $categoria) {
