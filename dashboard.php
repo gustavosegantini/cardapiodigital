@@ -109,12 +109,12 @@
 
 
                             <td>
-                                <!-- Remova o atributo onclick daqui -->
-                                <button data-id="<?= $prato['id'] ?>" class="btn-editar">Editar</button>
+                                <<button data-id="<?= $prato['id'] ?>" class="btn-editar">Editar</button>
 
 
-                                <button class="btn btn-danger btn-excluir"
-                                    data-prato-id="<?= $prato['id'] ?>">Excluir</button>
+
+                                    <button class="btn btn-danger btn-excluir"
+                                        data-prato-id="<?= $prato['id'] ?>">Excluir</button>
 
                             </td>
                         </tr>
